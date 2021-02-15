@@ -1,0 +1,71 @@
+\section{Introduction and motivations}\label{Section1}
+
+Selective Harmonic Elimination (SHE) \cite{Rodriguez2002} is a well-known methodology in electrical engineering, employed to improve the performances of a converter by controlling the phase and amplitude of the harmonics in its output voltage. As a matter of fact, this technique allows to increase the power of the converter and, at the same time, to reduce its losses. 
+%
+
+
+This formulation was introduce in [nuestro paper], In what follows, with the notation $\mathcal U$ we will always refer to a finite set of real numbers, contained in the interval $[-1,1]$
+\begin{align}\label{eq:Udef}
+	\mathcal U = \{u_\ell\}_{\ell=1}^L\subset [-1,1],
+\end{align}
+with cardinality $|\mathcal U| = L$. 
+
+\vspace{1em}
+\begin{problem}\label{pb:SHEpControl}
+    Let $\mathcal{U}$ be defined as in \eqref{eq:Udef} and let $\mathcal{E}_a = \{e_a^i\}_{i=1}^{N_a}$ and $\mathcal{E}_a = \{e_b^j\}_{j=1}^{N_b}$ be two sets of odd numbers. Given the vectors $\bm{a}_T \in \mathbb{R}^{N_a}$ and $\bm{b}_T \in \mathbb{R}^{N_b} $, let us define $\bm{x}_0=[\bm{a}_T,\bm{b}_T]^\top \in \mathbb{R}^{N_a}\times\mathbb{R}^{N_b}$. We look for $u:\in [0,\pi)\to\mathcal{U}$ such that the solution of 
+    \begin{equation}\label{eq:CauchyReversed}
+        \begin{cases}
+            \displaystyle\dot{\bm{x}}(\tau) = -\frac 2\pi\bm{\mathcal{D}}(\tau)u(\tau),  & \tau \in [0,\pi)
+            \\[6pt]
+            \bm{x}(0) = \bm{x}_0
+        \end{cases},
+    \end{equation}
+    and which satisfies $\bm{x}(\pi)=0$.
+
+    Where $\bm{x}(t) \in \mathbb{R}^{N_a + N_b}$ and 
+    \begin{gather}
+        \bm{\mathcal{D}}(\tau) = 
+        \begin{bmatrix} \bm{\mathcal{D}}^\alpha(\tau) \ \bm{\mathcal{D}}^\beta(\tau) \end{bmatrix}^T    
+    \end{gather}
+    and where $\bm{\mathcal{D}}^\beta(\tau) \in \mathbb{R}^{N_a} $ and $ \bm{\mathcal{D}}^\beta(\tau) \in \mathbb{R}^{N_b}$ are,
+    \begin{gather}\label{eq:DalphaDbeta}
+        \begin{align}
+            \bm{\mathcal{D}}^\alpha(\tau) = 
+            \begin{bmatrix} 
+                \cos(e_a^1\tau) \\ \vdots \\ \cos(e_a^{N_a}\tau) 
+            \end{bmatrix},
+            \quad \bm{\mathcal{D}}^\beta(\tau) = 
+            \begin{bmatrix} 
+                \sin(e_b^1\tau) \\ \vdots \\ \sin(e_b^{N_b}\tau) 
+            \end{bmatrix} 
+        \end{align} 
+    \end{gather}
+    \end{problem}
+    Nos preguntamos cúal es el conjunto controlable $\mathcal{R}$ de Problema \ref{pb:SHEpControl}, es decir para que $\bm{x}_0 \in \mathbb{R}^{N_a+N_b}$ existe un control que sea capaz de llevar el sistema dinámico al origen.
+
+    Suponiendo que en el instante $\tau = \pi$, el sistema se encuentra en $\bm{x}(\pi) = \bm{0}$, nos podemos preguntar que posible acción nos podría haber llevado a este punto. Es decir en un instante $\tau = \pi - \Delta \tau$, dado que solo podemos tomar un conjunto de acciones $\mathcal{U}$, suponiendo que en todo el intervalo $\Delta t$ la derivada del sistema se mantiene constante, entonces podemos afirmar que los puntos más lejanos de los cuales podemos provenier son 
+    \begin{gather}
+        x(\pi - \Delta \tau) =   
+        \begin{cases}
+            +\frac{2}{\pi} \bm{\mathcal{D}}(\pi - \Delta \tau)\\[5pt]
+            -\frac{2}{\pi} \bm{\mathcal{D}}(\pi - \Delta \tau) 
+        \end{cases}
+    \end{gather}
+    Considerando el instante de timepo anterior $\tau = \tau - 2\Delta \tau$, podremos razonar de la misma manera, pero esta vez existen ya dos puntos a donde podemos llegar para que luego el sistema sea controlable. Entonces los puntos controlables serían 
+    \begin{gather*}
+        x(\pi - 2\Delta \tau) = 
+        \begin{cases}
+            \frac{2}{\pi} \Big( 
+            +\bm{\mathcal{D}}(\pi - \Delta \tau) + \bm{\mathcal{D}}(\pi - 2\Delta \tau) \Big) \\
+            \frac{2}{\pi} \Big( 
+            -\bm{\mathcal{D}}(\pi - \Delta \tau) + \bm{\mathcal{D}}(\pi - 2\Delta \tau) \Big) \\
+            \frac{2}{\pi} \Big( 
+            +\bm{\mathcal{D}}(\pi - \Delta \tau) - \bm{\mathcal{D}}(\pi - 2\Delta \tau) \Big) \\
+            \frac{2}{\pi} \Big( 
+            -\bm{\mathcal{D}}(\pi - \Delta \tau) - \bm{\mathcal{D}}(\pi - 2\Delta \tau) \Big) \\
+        \end{cases}
+    \end{gather*}
+
+    Viendo el ejemplo anterior, vemos que en un instante de tiempo anterior $\Delta \tau$ el tamaño de conjunto de controlabilidad es igual a dos puntos, en el intante anterior $2\Delta \tau $ se añaden cuatro puntos más.
+
+    Solo necestiamos analizar el borde del conjunto de controlabilidad, dado que por el Teorema XX [], este tipo de conjunto es convexo y compacto.  

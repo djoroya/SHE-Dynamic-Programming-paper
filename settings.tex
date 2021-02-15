@@ -1,0 +1,34 @@
+\usepackage{graphicx}
+
+\usepackage{bm}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{ntheorem}
+
+\usepackage[colorlinks=true,citecolor=blue]{hyperref}
+\usepackage{breakcites}
+
+
+\edef\endfrontmatter{%
+	\unexpanded\expandafter{\endfrontmatter}% the current code
+	\noexpand\endNoHyper % add \endNoHyper at the end to match \NoHyper
+}
+
+\newtheorem{problem}{Problem}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{remark}{Remark}[section]
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}{Proposition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{simulation}{Simulation}[section]
+
+\theoremstyle{plain}
+\newtheorem*{proof}{\textit{Proof:}}
+
+\numberwithin{equation}{section}
+
+\DeclareMathOperator*{\argmin}{arg\,min}
+\usepackage{soul}
+
+\usepackage{xcolor}

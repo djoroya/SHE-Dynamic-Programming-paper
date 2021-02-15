@@ -1,0 +1,91 @@
+\section{Proyection of the real system in direction $w$}
+Consideramos el sistema de control proyectado en la dirección $\bm{w} \in \mathbb{R}^{N_b}  / \  ||\bm{w}|| = 1$, cuyo estado llamaremos $x^w(\tau) = \bm{w} \cdot\bm{x}(\tau) \in \mathbb{R}$
+\begin{gather}
+    \begin{cases}
+        \displaystyle\dot{x}^w(\tau) = 
+        -\frac{2}{\pi} 
+        \big( \bm{\mathcal{D}}(\tau) \cdot \bm{\omega} \big)  
+        u(\tau) 
+        & \tau \in [0,\pi]\\[6pt]
+        \displaystyle x^w(0) =  [\bm{x}_0 \cdot \bm{w}]
+    \end{cases}
+\end{gather}
+Para esta dinámica proyectada existirá un valor maximo  $\bm{x}_{m}^w$ para la condición inicial para el cual exista un control $u(\tau)$ que pueda conducir el sistema al origen en tiempo $\tau = \pi/2$.  
+
+ 
+Para hallar el valor $\bm{x}_{m}^w$ podemos pensar el cómo debe ser la estrategia de control para que el estado recorra la máxima distancia posible. 
+%
+La dinámica proyectada es lo más grande posible cuando la derivada toma siempre valores negativos. 
+% 
+Dado que podemos elegir $u(\tau)$ en el intervalo $[-1,1]$ la elegiremos de tal manera que la derivada temporal sea siempre negativa y lo más grande posible. 
+%
+Entonces la ecuación diferencial del punto más lejano en la direncción $\bm{w}$ en un instante de tiempo $\tau$ lo denotamos como $b^{\bm{w}}$ que podemos alcanzar en $\tau = \pi$ es:
+\begin{gather}
+    \begin{cases}
+        \displaystyle\dot{b}^w(\tau) = 
+        - \frac{2}{\pi} 
+        \big| \bm{\mathcal{D}}(\tau) \cdot \bm{\omega} \big|
+        & \tau \in [0,\pi]\\[6pt]
+        \displaystyle b^w(\pi) =  0
+    \end{cases}
+\end{gather}
+Con condición final el origen de coordenadas. También podemos escribirlo en  su versión integral:
+\begin{gather}
+   b^{\bm{w}}(\tau) = \frac{2}{\pi} \int_\tau^{\pi}
+    \big| \bm{\mathcal{D}}(\eta) \cdot \bm{\omega} \big| d\eta
+\end{gather}
+Entonces podemos integralo:
+\begin{gather}\label{eq:xmax}
+   b^{\bm{w}}(\tau) =  
+    \frac{2}{\pi} \Big|  \mathcal{G}_{\bm{w}}(\eta) \
+    \text{sign}(\bm{\mathcal{D}}(\eta) \cdot \bm{w})\Big|_{\eta=\tau}^{\eta=\pi}
+\end{gather}
+Donde hemos utilzado $\frac{d}{d\tau} \mathcal{G}_{\bm{w}}(\tau) =  \bm{\mathcal{D}}
+(\tau) \cdot \bm{w}$
+\begin{gather}
+    \bm{\mathcal{D}}(\tau) \cdot \bm{w} = 
+    \sum_{i \in \mathcal{E}_a}  \cos(i\tau)w^\alpha_i+ 
+    \sum_{j \in \mathcal{E}_b}  \sin(j\tau)w^\beta_j
+\end{gather}
+La primitiva $\mathcal{G}_{\bm{w}}(\tau)$ que buscamos es de la forma: 
+\begin{gather}
+    \mathcal{G}_{\bm{w}}(\tau) =  
+    \sum_{i \in \mathcal{E}_a}  \sin(i\tau)\frac{w^\alpha_i}{i} - 
+    \sum_{j \in \mathcal{E}_b}  \cos(j\tau)\frac{w^\beta_j}{j}
+\end{gather}
+Entonces la Ecuación \eqref{eq:xmax} queda:
+\begin{gather}
+   b^{\bm{w}}(\tau) =  b^{\bm{w}}(\pi) - \frac{2}{\pi} \mathcal{G}_{\bm{w}}(\tau) \ \text{sign}(\bm{\mathcal{D}}(\tau) \cdot \bm{w})
+\end{gather}
+Ahora calculamos $b(\pi)$: 
+\begin{gather}
+    \bm{\mathcal{D}}(\pi) \cdot \bm{w} = 
+    - \sum_{i \in \mathcal{E}_a} w_j^\alpha   \\
+    \mathcal{G}_{\bm{w}}(\pi) = \sum_{j \in \mathcal{E}_b} \frac{w_j^\beta}{j}
+\end{gather}
+Entonces 
+\begin{gather}
+    x_{m}^w(\pi) = - \frac{2}{\pi} \sum_{j \in \mathcal{E}_b} \frac{w_j^\beta}{j}
+\end{gather}
+\begin{theorem}
+Entonces dados una trayectoria $\bm{\beta}(\tau)  |  \tau \in [0,\pi/2]$ generada mediante una estrategia $u(\tau)$ y una dirección $\bm{w}$, si la proyección  $x^w(\tau) = (\bm{x}(\tau),\bm{w})$ es siempre tal que $ x^w(\tau) < x^{\bm{w}}_{max }(\tau) \ |  \forall \tau \in [0,\pi]$ entonces $x^w(\pi)\leq 0$. Es decir la proyección de $\bm{x}(\tau)$ puede alcanzar el origen de coordenadas en tiempo $\tau = \pi$ e incluso ir más alla del origen.
+\end{theorem}
+
+Final 
+\begin{gather}
+   b^{\bm{w}}(\tau) =  
+    x^{\bm{w}}_m(\pi)- \frac{2}{\pi} 
+    \Big[ 
+    \mathcal{G}_{\bm{w}}(\tau) \ \text{sign}(\bm{\mathcal{D}}(\tau) \cdot \bm{w})
+    \Big]
+\end{gather}
+
+
+\begin{gather}
+    \mathcal{P}_{\bm{w}} =
+    \{ \bm{x}(t) \in \mathbb{R}^{N_a + N_b}|
+     \bm{w} \cdot \bm{x}(t) + x^{\bm{w}}_m(\tau) = 0\}
+\end{gather}
+\section{Obtención de estrategias $u(\tau)$}
+
+Dado una condición inicial $\bm{x}(\tau)$, como podríamos decir si es controlable  o no?    
